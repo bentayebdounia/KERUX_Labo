@@ -20,6 +20,13 @@ const JournalReception = (props) => {
 
     const recherche = (e) => {
         e.preventDefault();
+        if (comboBox === 'fournisseur' ) {
+            ProcessService.getBonByNomFournisseur(serchValue)
+            .then((res) => {
+                setProcessRecheche(res.data)
+                console.log(res.data);
+            })
+        } 
         
     }
    
@@ -40,13 +47,19 @@ const JournalReception = (props) => {
             )
         }
 
-        else{
+        else if(comboBox==='fournisseur'){
             tableCondition = (
                 processRecherche.map(
                     (p, key) =>
-                        <tr key={key}>
-                            
-                        </tr>
+                    <tr key={key}>
+                    <td>{p.id_bon}</td>
+                    <td>{p.nom_fournisseur}</td>
+                    <td>{p.acheteur}</td>
+                    <td>{p.type_bon}</td>
+                    <td>{p.recepteur}</td>
+                    <td>{p.datee}</td>
+                    <td>{p.heure}</td>
+                </tr>
                 )
             )
         }
@@ -61,8 +74,7 @@ const JournalReception = (props) => {
                     <div className="mb-4 row agent">
                         <select className="form-select" aria-label="Default select example" id="roleAgent" style={{width:"20%" , marginLeft:"30px"}} value={comboBox} onChange={(e)=> setComboBox(e.target.value)} >
                             <option  selected></option>
-                            <option value="id_gnerate">ID de bon</option>
-                            <option value="categorie">Nom fournisseur</option>
+                            <option value="fournisseur">Nom fournisseur</option>
                             
                         </select>
                     

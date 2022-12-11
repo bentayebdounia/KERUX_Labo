@@ -103,6 +103,15 @@ getbonByFournisseur = (req, res) => {
         )
 }
 
+getBon_NomFournisseur = (req, res) => {
+    const nom_fournisseur = req.params.nom_fournisseur
+     pool.query (queries.getBonByNomFournisseur, [nom_fournisseur],
+        (error, result) => {
+            res.status(200).json(result.rows)
+        }
+        )
+}
+
 getProdFourni = (req, res) => {
     pool.query(queries.getProdFourni,
         (error, result) => {
@@ -131,5 +140,6 @@ module.exports = {
     getProdFourni,
     getProdByNomFourniseur,
     getBonBydateHeur,
+    getBon_NomFournisseur,
 
 }

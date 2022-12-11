@@ -56,6 +56,7 @@ const AjouterStock = (props) => {
                 console.log(boxe[i].id_gnerate);
                 await ajouterauStock(boxe[i].id_gnerate)
                 boxe.splice(i,1)
+                i=i-1
                 }
         }
         //props.handleClose()    

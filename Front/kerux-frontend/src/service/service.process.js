@@ -4,6 +4,7 @@ const PRODUIT_API_BON = "http://localhost:8080/process/ajouterBon";
 const PRODUIT_API_Process = "http://localhost:8080/process/";
 const GET_BON_ORDER_BY_DATE = "http://localhost:8080/process/p/getBon"
 const GET_BON_ORDER_BY_FOURNISSEUR = "http://localhost:8080/process/a/getbonFournisseur"
+const GET_BON_BY_NOM_FOURNISSEUR = "http://localhost:8080/process/getBonByNomFournisseur/"
 
 
 class ProcessService {
@@ -26,6 +27,9 @@ class ProcessService {
         return axios.get(GET_BON_ORDER_BY_FOURNISSEUR)
     }
 
+    getBonByNomFournisseur (nom_fournisseur) {
+        return axios.get(GET_BON_BY_NOM_FOURNISSEUR+nom_fournisseur)
+    }
     
     
 }

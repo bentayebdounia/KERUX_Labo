@@ -31,13 +31,18 @@ const ModifyStock = "UPDATE stock SET date_sortie= $1 , poids_sortie= $2 WHERE i
 const ajouterReception = "INSERT INTO bon ( fk_fournisseur, acheteur, type_bon, datee, heure, recepteur )VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING id_bon"
 const getBonBydateHeure = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur ORDER BY datee DESC , heure DESC"
 const getbonByFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur ORDER BY fk_fournisseur"
+const getBonByNomFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur=$1  ORDER BY datee DESC, heure DESC"
+
 const getProdFourni = " SELECT * FROM bon , fournisseur, produit_fourni WHERE fk_fournisseur=id_fournisseur AND id_bon = fk_bon   ORDER BY fk_fournisseur;"
-const getBonByNomFournisseur = "SELECT * FROM bon, fournisseur WHERE "
+//const getBonByNomFournisseur = "SELECT * FROM bon, fournisseur WHERE "
+
 const getProdByNomFourniseur ="SELECT * FROM bon , fournisseur, produit_fourni WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur=$1  AND id_bon = fk_bon  ORDER BY fk_fournisseur"
+
 // -- Produit fourni *****************
 const ajouterProduitFourni = "INSERT INTO produit_fourni (categorie, nom_produit, poids_fourni, nombre_fourni, datee, heure, fk_bon )"
                                 +" VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING categorie, nom_produit, id_produit"
-// -- process enregistrement ******************
+
+                                // -- process enregistrement ******************
 const ajouterProcessEnreg = "INSERT INTO process (categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni, id_gnerate)"
                                 +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9) RETURNING categorie, nom_produit,poids, nombre, id_gnerate "
 
@@ -128,6 +133,7 @@ module.exports={
     getBonBydateHeure,
     getbonByFournisseur,
     getProdFourni,
-    getProdByNomFourniseur
+    getProdByNomFourniseur,
+    getBonByNomFournisseur
 
 }

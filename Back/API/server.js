@@ -19,6 +19,7 @@ const sortietRoute = require("./routes/route.sortie")
 const agentProcess = require("./routes/route.agentProcess")
 
 const fournisseur = require("./routes/route_fournisseur")
+const produit = require("./routes/route.produit")
 
 //----------------middleware ---------------------------------------------------//
 app.use(cors())
@@ -42,7 +43,7 @@ app.use("/stock", stockRoute)
 app.use("/agentProcess",agentProcess)
 
 app.use("/fournisseur",fournisseur)
-
+app.use("/produit", produit )
 
 //--ajouter
 //require("./routes/route_role.js")

@@ -123,6 +123,8 @@ const Sortie = (props) => {
                                 id_coupage= {props.process.id_coupage}
                                 fk_proditfourni={props.process.fk_proditfourni}
                                 test={props.test}
+
+                                toggleDisplay = {props.toggleDisplay}
             />
 
             <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}

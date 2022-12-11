@@ -1,5 +1,8 @@
 const {app , BrowserWindow, Menu, ipcMain} = require('electron')
-const path = require('path')
+const fs = require("fs");
+const path = require("path");
+
+const {PosPrinter} = require('electron-pos-printer')
 
 let win
 
@@ -18,7 +21,7 @@ const creatWindow = () => {
     webPreferences: {
      nodeIntegration:false,
       
-      //preload: path.join( __dirname, './test/preload.js')
+      //preload: path.join( __dirname, './test/preload.js'),
       
       contextIsolation: false
     },
@@ -45,4 +48,15 @@ app.on('activate', function() {
         creatWindow()
     }
 })
+
+ipcMain.on('print' , (event, arg) => {
+    const data = JSON.parse(arg)
+    //printer
+    PosPrinter.print( data, {
+      printerName: 'XPC-80',
+      silent: true,
+      preview: true
+    }
+).catch(error => console.error(error))
+  })
 

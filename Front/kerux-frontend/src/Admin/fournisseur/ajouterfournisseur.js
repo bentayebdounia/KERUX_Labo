@@ -130,7 +130,7 @@ const AjouterFournisseur = (props) => {
                                 <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={formJuridique} onChange={(e)=> setFormJuridique(e.target.value)} required>
                                     <option selected></option>
                                     <option value="SARL">SARL</option>
-                                    <option value="EURL">Eurl</option>
+                                    <option value="EURL">EURL</option>
                                 </select>
                             </div>
                         </div>

@@ -9,6 +9,9 @@ import ServiceAdmin from '../service/serviceAdmin'
 import ServiceRole from '../service/service.role'
 
 import AjouterFournisseur from './fournisseur/ajouterfournisseur'
+import ListFournisseur from './fournisseur/listeFournisseur';
+import AjouterProduit from './produit/ajouterProduit'
+import List from './produit/listeProduit'
 
 const Acueil = (props) => {
     const [controleAjout, setControleAjout] = useState(false)
@@ -31,7 +34,7 @@ const Acueil = (props) => {
 
 
     //teste d'affichage coponenets
-    let agent, modifyAgent, listAgent,  ajouterFournisseur
+    let agent, modifyAgent, listAgent,  ajouterFournisseur, ajouterProduit, ListProduit
 
 
     const [fk_role, setFk_role] = useState()
@@ -46,9 +49,22 @@ const Acueil = (props) => {
     const [prenomUser, setPrenomUser]  = useState()
     const [idUser, setIdUser]  = useState()
 
-    const [toggleAjoutFourni , setToggleAjoutFourni ]  = useState (false)
-    const toggleshowAjoutFourni = () => setToggleAjoutFourni(true)
-    const toggleDisplayAjoutFourni = () => setToggleAjoutFourni (false)
+    const [toggleAjoutFourni , setToggleAjoutfourni ]  = useState (false)
+    const toggleshowAjoutFourni = () => setToggleAjoutfourni(true)
+    const toggleDisplayAjoutFourni = () => setToggleAjoutfourni (false)
+    const [togglelistFourni , setTogglelistfourni ]  = useState (false)
+    const toggleshowListFourni = () => setTogglelistfourni(true)
+    const toggleDisplayListFourni = () => setTogglelistfourni (false)
+
+    const [toggleAjoutProduit , setToggle_ajoutproduit ]  = useState (false)
+    const toggleshowAjoutProduit = () => setToggle_ajoutproduit(true)
+    const toggleDisplayAjoutProduit = () => setToggle_ajoutproduit (false)
+
+    const [toggleListProduit , setToggle_listproduit ]  = useState (false)
+    const toggleshowListProduit = () => setToggle_listproduit(true)
+    const toggleDisplayListProduit = () => setToggle_listproduit (false)
+
+  
 
     useEffect(()=>{
       setNomUser  (location.name)
@@ -121,7 +137,9 @@ const Acueil = (props) => {
         setControleModif(false)
         setControleList(false)
         toggleDisplayAjoutFourni()
-        console.log(controleAjout)       
+        toggleDisplayListFourni()
+        toggleDisplayAjoutProduit() 
+        toggleDisplayListProduit()      
     }
     const modifier =  () => {
         setControleAjout(false)
@@ -130,7 +148,9 @@ const Acueil = (props) => {
         setPersonnes([])
         setRecherche('')
         toggleDisplayAjoutFourni()
-        
+        toggleDisplayListFourni()
+        toggleDisplayAjoutProduit() 
+        toggleDisplayListProduit() 
         
 
         
@@ -141,7 +161,9 @@ const Acueil = (props) => {
         setControleList(true)
         getAllPersonne()
         toggleDisplayAjoutFourni()
-        
+        toggleDisplayListFourni()
+        toggleDisplayAjoutProduit() 
+        toggleDisplayListProduit()
 
         
     }
@@ -151,20 +173,52 @@ const Acueil = (props) => {
         setControleModif(false)
         setControleList(false)
         toggleshowAjoutFourni()
+        toggleDisplayListFourni()
+        toggleDisplayAjoutProduit() 
+        toggleDisplayListProduit()
     }
     const fournisseurModify= () => {
       setControleAjout(false)
         setControleModif(false)
         setControleList(false)
         toggleDisplayAjoutFourni()
+        toggleDisplayListFourni()
+        toggleDisplayAjoutProduit() 
+        toggleDisplayListProduit()
     }
     const fournisseurList= () => {
       setControleAjout(false)
         setControleModif(false)
         setControleList(false)
         toggleDisplayAjoutFourni()
-        
+        toggleshowListFourni()
+        toggleDisplayAjoutProduit() 
+        toggleDisplayListProduit()
     }
+
+    
+
+    const produitAjout= () => {
+          setControleAjout(false)
+          setControleModif(false)
+          setControleList(false)
+          toggleshowAjoutFourni()
+          toggleDisplayListFourni()
+          toggleshowAjoutProduit() 
+          toggleDisplayListProduit()
+
+    }
+
+    const produitList= () => {
+      setControleAjout(false)
+      setControleModif(false)
+      setControleList(false)
+      toggleDisplayAjoutFourni()
+      toggleDisplayListFourni()
+      toggleDisplayAjoutProduit() 
+      toggleshowListProduit()
+      
+}
 
 /*************************** ajouter agent  ************************************************/
     if(controleAjout ){
@@ -426,41 +480,78 @@ if (controleList){
 if(toggleAjoutFourni){
   ajouterFournisseur=(<AjouterFournisseur display={toggleDisplayAjoutFourni} /> )
 }
+if(togglelistFourni){
+  ajouterFournisseur=(<ListFournisseur display={toggleDisplayListFourni} /> )
+}
+
+if(toggleAjoutProduit){
+  ajouterFournisseur=(<AjouterProduit display={toggleDisplayAjoutProduit} /> )
+}
+if(toggleListProduit){
+  ListProduit=(<List display={toggleDisplayListProduit} /> )
+}
     
 /*************************** sidbar ****************************************************************/
 
-let fournisseur , agents
-agents= (
-  <>
-      <ol>
-      <Link to={'#'} className="nav-link active" aria-current="page"  onClick={ajouter}>Ajouter un agent</Link>
-      </ol>
-      <ol>
-      <Link to={'#'} className="nav-link" onClick={modifier}  >Modifier un agent</Link>
-      </ol>
-      <ol>
-      <Link to={'#'} className="nav-link" onClick={liste} >Liste des agents</Link>
-      </ol>
-    </>
-)
+let fournisseur , agents , produit
+const [toggleAgentBar, setToggleagentbar] = useState(false)
+const AffichAgentBar = () => setToggleagentbar(!toggleAgentBar)
+
+
+const [toggleFournisseurBar, setTogglefournisseurbar] = useState(false)
+const AffichFournisseurBar = () => setTogglefournisseurbar(!toggleFournisseurBar)
+
+const [toggleProduitBar, setToggleproduitbar] = useState(false)
+const AffichProduitBar = () => setToggleproduitbar(!toggleProduitBar)
 
 
 
-  fournisseur = (
+if (toggleAgentBar) {
+                agents= (
+                  <>
+                      <ol>
+                      <Link to={'#'} className="nav-link active" aria-current="page"  onClick={ajouter}>Ajouter un agent</Link>
+                      </ol>
+                      <ol>
+                      <Link to={'#'} className="nav-link" onClick={modifier}  >Modifier un agent</Link>
+                      </ol>
+                      <ol>
+                      <Link to={'#'} className="nav-link" onClick={liste} >Liste des agents</Link>
+                      </ol>
+                    </>
+)}
+
+
+
+if(toggleFournisseurBar){
+          fournisseur = (
+            <>
+              <ol>
+              <Link to={'#'} className="nav-link" onClick={fournisseurAjout} >Ajouter fournisseur</Link>
+              </ol>
+    
+              <ol>
+              <Link to={'#'} className="nav-link" onClick={fournisseurList} >Liste des fournisseurs</Link>
+              </ol>
+            </>
+        )
+
+}
+
+if(toggleProduitBar){
+  produit = (
     <>
       <ol>
-      <Link to={'#'} className="nav-link" onClick={fournisseurAjout} >Ajouter fournisseur</Link>
+      <Link to={'#'} className="nav-link" onClick={produitAjout}  >Ajouter produit</Link>
       </ol>
+      
       <ol>
-      <Link to={'#'} className="nav-link"  onClick={fournisseurModify} >Modifier fournisseur</Link>
-      </ol>
-      <ol>
-      <Link to={'#'} className="nav-link" onClick={fournisseurList} >Liste des fournisseurs</Link>
+      <Link to={'#'} className="nav-link" onClick={produitList} >Liste des produits</Link>
       </ol>
     </>
 )
 
-
+}
 
 
 
@@ -473,13 +564,20 @@ agents= (
                     <div className="left-sidebar">
                         <ul className="nav flex-column">
                             <li className="nav-item">
-                                 <Link to={'#'}  className="nav-link active" aria-current="page" style={{color: "unset" , fontWeight:"bold" , fontSize:"22px"}}>Agent</Link>
+                                 <Link to={'#'}  className="nav-link active" aria-current="page" style={{color: "unset" , fontWeight:"bold" , fontSize:"22px"}}
+                                                   onClick={AffichAgentBar}
+                                                   >Agent</Link>
                                  {agents}
                             </li>
                             
                             <li className="nav-item">
-                                <Link to={'#'} className="nav-link" style={{color: "unset" , fontWeight:"bold" , fontSize:"22px"}} >Fournisseur</Link>
+                                <Link to={'#'} className="nav-link" style={{color: "unset" , fontWeight:"bold" , fontSize:"22px"}} onClick={AffichFournisseurBar} >Fournisseur</Link>
                                 {fournisseur}
+                            </li>
+
+                            <li className="nav-item">
+                                <Link to={'#'} className="nav-link" style={{color: "unset" , fontWeight:"bold" , fontSize:"22px"}} onClick={AffichProduitBar} >Produit</Link>
+                                {produit}
                             </li>
                         </ul>
                     </div>
@@ -503,11 +601,11 @@ agents= (
                     </Link>
                     <ul className="dropdown-menu dropdown-menu-end">
                         <li>
-                            <span className="spanUser">{nomUser} {prenomUser}</span> 
+                            <span className="spanUser">MAHMOUDI Amine</span> 
                             <br/>
-                            <span className="spanID">{idUser}</span> 
+                            <span className="spanID">4</span> 
                             <br/>
-                            <span className="spanRole">Role</span> 
+                            <span className="spanRole">admin</span> 
                         </li>
                         <li><Link to='login' className="dropdown-item" >Déconnecter</Link></li>
                     </ul>
@@ -520,6 +618,7 @@ agents= (
                     {modifyAgent}
                     {listAgent}
                     {ajouterFournisseur}
+                    {ListProduit}
                     
                 </div>
             </main>

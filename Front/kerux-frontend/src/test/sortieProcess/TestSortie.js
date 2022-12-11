@@ -11,6 +11,10 @@ const TestSortie = () => {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
+
+    const [toggle, setToggle] = useState () 
+    const toggleshow = () => setToggle(true)
+    const toggleDisplay = () => setToggle (false)
     
     
      const [process, setProcess] = useState({
@@ -48,7 +52,7 @@ const TestSortie = () => {
                 }   
                     else if(res.data.fk_stock===null){
                         console.log(test)
-                        setTest(true)
+                        toggleshow()
                     
                     }
                 
@@ -62,11 +66,11 @@ const TestSortie = () => {
     var sortie , testSortie
 
     
-      if(test===true){
-        sortie = (<Sortie id={id} process={process} test={test}/>)
+      if(toggle){
+        sortie = (<Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} />)
       }
 
-      if(test===false){
+      else{
         testSortie = (
             <section id="etape_section">
             <div className="container">

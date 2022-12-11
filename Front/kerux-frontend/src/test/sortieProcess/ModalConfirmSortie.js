@@ -12,10 +12,10 @@ const ModalConfirmNet = (props) => {
         //const nettoyage = {props.id_box, props.categorie, props.typeProd, props.poids, props.nombrs }      nom_produit, etape, poids, nombre, id_enregistrement, fk_proditFourni
         SortieService.ajouterSortie( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.id_nettoyage , props.id_coupage, props.id_box , props.fk_proditfourni).then( (res)=> {
             console.log(res.data)
-            alert(res.data)
+            
         })
        
-        
+        props.toggleDisplay()
         props.handleClose2()
         
         

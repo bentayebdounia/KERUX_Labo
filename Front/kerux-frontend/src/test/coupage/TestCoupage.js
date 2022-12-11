@@ -53,7 +53,7 @@ const TestCoupage = () => {
 
     const dateNow = () => {
         var today = new Date 
-        var datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + today.getDate()
+        var datee = today.getFullYear()+''+(today.getMonth() + 1) + '' + today.getDate()
         console.log("dateeee "+datee );
         return datee
     }
@@ -66,7 +66,7 @@ const TestCoupage = () => {
         return heure
     }
     const generateId = (fk_proditFourni) =>{
-        var id = (fk_proditFourni+"-id-"+dateNow()+" "+TimeNow())  
+        var id = (fk_proditFourni+"id"+dateNow()+""+TimeNow())  
         console.log("id_generate= "+id);
     return id
     }

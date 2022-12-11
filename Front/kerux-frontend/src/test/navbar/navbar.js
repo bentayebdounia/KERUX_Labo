@@ -5,6 +5,11 @@ import AjouterEntrepot from '../entrepot/ajouterEntrepot'
 import Etape from '../etapeMenu/component.etap'
 import JournalNettoyage from '../journalProcess/journalNettoyage'
 import JournalReception from '../journalProcess/journalRecetion'
+import JournalProduitsFournis from '../journalProcess/journalProduitFourni'
+import MouvementStock from '../Stock/mouvementStock'
+import AcueilBoutton from '../acueil_boutton'
+
+
 
 const Navbar = () => {
     
@@ -22,40 +27,51 @@ const Navbar = () => {
     const handleCloseJournalReception = () => setShowJournalReception(false)
     const handleShowJournalReception = () => setShowJournalReception(true)
 
+    const [showJournalProduitFourni, setShowJournalProduitFournit] = useState(false)
+    const handleCloseJournalRProduitFourni = () => setShowJournalProduitFournit(false)
+    const handleShowJournalProduitFourni = () => setShowJournalProduitFournit(true)
+
+    const [showMouvementStock, setShowMouvementStockt] = useState(false)
+    const handleCloseMouvementStock = () => setShowMouvementStockt(false)
+    const handleShowMouvementStock = () => setShowMouvementStockt(true)
+
+    const [showProcess, setShowprocess] = useState(false)
+    const handleCloseProcess = () => setShowprocess(false)
+    const handleShowProcess = () => setShowprocess(true)
+
+    const [showAcueil, setShowacueil] = useState(false)
+    const handleCloseAcueil = () => setShowacueil(false)
+    const handleShowAcueil = () => setShowacueil(true)
+
     const [journalprocess, setJournalProcess ] = useState('')
 
     const [entrepot, setEntrepot] = useState()
     const location = useLocation();
   let etape
 
+  
+
    
-    function clickProcess () {
-       setProcess(true)
-        console.log("click process")
-        
-        console.log("process = ", process)
-       
-    }
-    if(process){
-      etape=(<Etape/>)
-    }
+    
+    
 
     return (
         <div>
           <nav className="navbar navbar-dark bg-dark fixed-top flex-md-nowrap p-0 shadow">
             <div className="container-fluid" id='divContainer'>
           
-          <Link className="nav-link active me-auto mx-3" style={{color: "white" , fontSize: "13px" }} aria-current="page" to="#">
+          <Link className="nav-link active me-auto mx-3" style={{color: "white" , fontSize: "13px" }} aria-current="page" to="#"  >
             <i className="bi bi-house-door-fill" style={{fontSize: "1rem" ,color:"white"}}></i>
             Acueil
           </Link>
-          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  aria-current="page" to="#" onClick={clickProcess}>Process</Link>
+          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  aria-current="page" to="#" onClick={handleShowProcess}>Process</Link>
           <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">
             <i className="bi bi-journals" style={{fontSize: "1rem", color:"white"}}></i>
             Journal
           </Link>
           <ul className="dropdown-menu" style={{marginLeft:'35%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalReception() } } >Journal de reception</button> </li>
+            <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalProduitFourni() } } >Journal de produits fournis</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('enregistrement') } }>Journal de enregistrement</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('nettoyage') } } >Journal de nettoyage</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('coupage') } }>Journal de coupage</button> </li>
@@ -70,12 +86,11 @@ const Navbar = () => {
           </Link>
           <ul className="dropdown-menu" style={{marginLeft:'50%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={handleShow4}>Entrepot</button> </li>
-            <li> <button className="dropdown-item"  type="button">Movement de stock</button> </li>
+            <li> <button className="dropdown-item"  type="button" onClick={handleShowMouvementStock}>Movement de stock</button> </li>
             
           </ul>
 
 
-          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  aria-current="page" to="#">Inventair</Link>
           <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  aria-current="page" to="#">Statistique</Link>
         
           <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -84,42 +99,56 @@ const Navbar = () => {
           </Link>
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
-              <span className="spanUser">Nom user</span> 
+              <span className="spanUser">MAHMOIDI Amin</span> 
               <br/>
-              <span className="spanID">ID </span> 
+              <span className="spanID">4 </span> 
               <br/>
-              <span className="spanRole">Role</span> 
+              <span className="spanRole">admin</span> 
            </li>
             <li><Link className="dropdown-item" to='login'>Déconnecter</Link></li>
           </ul>
           
             </div>
         </nav>
-        {etape}
+        {showProcess && <Etape/>}
+        {showAcueil && <AcueilBoutton/> }
 
-        <AjouterEntrepot 
-            show={show4} 
-            handleClose={handleClose4} 
-            handleShow={handleShow4}
-            
-            
-          />
+        {show4 && <AjouterEntrepot 
+                            show={show4} 
+                            handleClose={handleClose4} 
+                            handleShow={handleShow4}
+                            
+                            
+                          />}
 
-          <JournalNettoyage   show = {showJournalNettoyage}
-                              handleClose={handleCloseJournalNettoyage} 
-                              handleShow={handleShowJournalNettoyage}
-                              journalprocess={journalprocess}
+          {showJournalNettoyage &&  <JournalNettoyage   show = {showJournalNettoyage}
+                                                handleClose={handleCloseJournalNettoyage} 
+                                                handleShow={handleShowJournalNettoyage}
+                                                journalprocess={journalprocess}
           
-          />
+                                          />}
 
-          <JournalReception   show = {showJournalReception}
-                              handleClose={handleCloseJournalReception} 
-                              handleShow={handleShowJournalReception}
-                              
-                    
-                    />
+          {showJournalReception &&  <JournalReception   show = {showJournalReception}
+                                                handleClose={handleCloseJournalReception} 
+                                                handleShow={handleShowJournalReception}
+                                                
+                                      
+                                          />}
+          {showJournalProduitFourni &&  <JournalProduitsFournis   show = {showJournalProduitFourni}
+                                                handleClose={handleCloseJournalRProduitFourni} 
+                                                
+                                                
+                                      
+                                          />}
 
-        
+          {showMouvementStock &&  <MouvementStock
+                                                        show = {showMouvementStock}
+                                                        handleClose={handleCloseMouvementStock} 
+                                                        
+
+                                          />
+
+          }
         
         </div>
     

@@ -4,7 +4,14 @@ const queries= require("../queries/queries")
 
 const dateNow = () => {
     var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + today.getDate()
+    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
+    console.log("dateeee "+datee );
+    return datee
+}
+
+const dateNow2 = () => {
+    var today = new Date 
+    datee = today.getFullYear()+''+(today.getMonth() + 1) + '' + (today.getDate())
     console.log("dateeee "+datee );
     return datee
 }
@@ -18,7 +25,7 @@ const HeureNow = () => {
 
 const TimeNow = () => {
     var today = new Date 
-    heure = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()+ ':' + today.getMilliseconds()
+    heure = today.getHours() + '' + today.getMinutes() + '' + today.getSeconds()+ '' + today.getMilliseconds()
     console.log("heure "+heure );
     return heure
 }
@@ -28,7 +35,7 @@ const generieIdEnreg = (fk_proditFourni, etape ) => {
     
     const spl = etape.split('')
     console.log(spl[0]+spl[1])
-    var id = (fk_proditFourni+"-"+spl[0]+spl[1]+"-"+dateNow()+" "+TimeNow())  
+    var id = (fk_proditFourni+""+spl[0]+spl[1]+""+dateNow2()+""+TimeNow())  
     return id
 }
 

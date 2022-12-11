@@ -4,7 +4,8 @@ const GetDat = require ("./GetDate")
 
 const dateNow = () => {
     var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + today.getDate()
+    //on doit regler la date pcq les donnee dans la bdd ajoute un jour mais on affichage n'ajoute rien
+    datee = today.getFullYear()+'-'+(today.getMonth()+1) + '-' + (today.getDate()+1)
     console.log("dateeee "+datee );
     return datee
 }
@@ -20,6 +21,7 @@ const HeureNow = () => {
 ajouterBon = (req, res) => { 
     var datee = dateNow()
     var heure = HeureNow()
+    
     const { fk_fournisseur, acheteur, type_bon, recepteur } = req.body
     pool.query(queries.ajouterReception, [fk_fournisseur ,acheteur ,type_bon  ,datee , heure, recepteur] ,
          (error, result) =>{
@@ -77,6 +79,7 @@ getProcessId = (req, res) => {
     const id = req.params.id_gnerate
     pool.query(queries.getProcessById, [id], 
         (error, result) => {
+            if (error) throw error
             const notExiste = result.rows.length
             if (!notExiste) {
                 res.send("ID n'existe pas")
@@ -90,6 +93,7 @@ getProcessId = (req, res) => {
 
 getBonBydateHeur= (req, res) => {
     pool.query(queries.getBonBydateHeure ,(error, result) => {
+        if (error) throw error
         res.status(200).json(result.rows)
     }
     )
@@ -98,6 +102,7 @@ getBonBydateHeur= (req, res) => {
 getbonByFournisseur = (req, res) => {
     pool.query(queries.getbonByFournisseur,
         (error, result) => {
+            if (error) throw error
             res.status(200).json(result.rows)
        }
         )
@@ -107,6 +112,7 @@ getBon_NomFournisseur = (req, res) => {
     const nom_fournisseur = req.params.nom_fournisseur
      pool.query (queries.getBonByNomFournisseur, [nom_fournisseur],
         (error, result) => {
+            if (error) throw error
             res.status(200).json(result.rows)
         }
         )
@@ -115,6 +121,7 @@ getBon_NomFournisseur = (req, res) => {
 getProdFourni = (req, res) => {
     pool.query(queries.getProdFourni,
         (error, result) => {
+            if (error) throw error
             res.status(200).json(result.rows)
        }
         )
@@ -124,6 +131,7 @@ getProdByNomFourniseur = (req, res) => {
     const nom_fournisseur = req.params.nom_fournisseur
     pool.query (queries.getProdByNomFourniseur, [nom_fournisseur] , 
         (error, result) => {
+            if (error) throw error
             res.status(200).json(result.rows)
        }
         )

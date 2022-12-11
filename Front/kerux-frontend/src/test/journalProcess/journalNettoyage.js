@@ -7,6 +7,7 @@ import serviceCondi from '../../service/service.condit'
 import serviceMarinade from '../../service/service.marinade';
 import serviceSorti from '../../service/service.sorti'
 import serviceEnregistrement from '../../service/service.enregistrement'
+import moment from 'moment';
 
 const JournalNettoyage = (props) => {
     
@@ -231,7 +232,7 @@ const JournalNettoyage = (props) => {
                             <td>{p.nom_produit}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{ p.datee}</td>
+                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
                             <td>{p.heure}</td>
                         </tr>
                 )
@@ -248,7 +249,7 @@ const JournalNettoyage = (props) => {
                             <td>{p.nom_produit}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{ p.datee}</td>
+                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
                             <td>{p.heure}</td>
                         </tr>
                 )

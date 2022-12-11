@@ -1,10 +1,10 @@
 const pool =require ("../db")
 const queries= require("../queries/queries")
-
+const q = require(".././queries/querie.stock")
 
 const dateNow = () => {
     var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + today.getDate()
+    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
     console.log("dateeee "+datee );
     return datee
 }
@@ -36,8 +36,41 @@ modifierStock =(req, res) => {
         })
 }
 
+getStock = (req, res) => {
+    pool.query( q.getStock, 
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        }  
+        )
+}
+
+getStockByDate = (req, res) => {
+    const datee = req.params.datee
+    pool.query ( q.getStockByDate , [datee],
+        (error, result) => {
+            
+            res.status(200).json(result.rows)
+        } 
+        )
+}
+
+getStockByEtape = (req, res) => {
+    const etape = req.params.etape
+    pool.query ( q.getStockByEtape, [etape],
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        } 
+        )
+}
+
 module.exports = {
     ajouterStock,
     modifierStock,
+
+    getStock,
+    getStockByEtape,
+    getStockByDate
 
 }

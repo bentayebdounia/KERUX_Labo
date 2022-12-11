@@ -5,6 +5,8 @@ import ModelReponse from '../Models/Model.repense'
 import ServiceRole from '../service/service.role'
 import './login.css'
 
+//import {ipcRendrer} from 'electron'
+
 const Login=() => {
     const [id, setId]=useState('')
     const [password, setPassword]=useState('')
@@ -67,6 +69,11 @@ const Login=() => {
                 
            
     }
+
+    function print () {
+    
+        //ipcRendrer.send('print',JSON.stringify([{"hello":'hello'}]))
+       }
 
 return (
     <div className="container-fluid">

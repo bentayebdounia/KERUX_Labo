@@ -1,7 +1,7 @@
 const pool =require ("../db")
 const queries= require("../queries/queries.nettoyage")
 const q= require("../queries/queries")
-
+const ActualProcess = require ("../queries/querie.actualProcess")
 const dateNow = () => {
     var today = new Date 
     datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
@@ -134,6 +134,15 @@ getProcessByEtapes_idGnerate = (req, res) => {
     )
 }
 
+
+getProduitEnAttente = (req, res) => {
+    pool.query (ActualProcess.ActualProcess, ['enregistrement' , 'nettoyage'],
+            (error, result) => {
+                res.status(200).json(result.rows)  
+        }
+    )
+}
+
 module.exports = {
     ajouterProcessNettoyage,
     modifierProcessNettoyage,
@@ -141,6 +150,8 @@ module.exports = {
     getProcessByDateHeure,
     getProcessByEtapes_categorie,
     getProcessByEtapes_produit,
-    getProcessByEtapes_idGnerate
+    getProcessByEtapes_idGnerate,
+
+    getProduitEnAttente
 
 }

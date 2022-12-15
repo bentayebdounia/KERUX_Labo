@@ -95,8 +95,9 @@ main{
 
 .table{
     margin-top: 20px;
-    height: 100px;
-    width: calc(90%);
+   
+    width: calc(97%);
+    
 }
 
 .table thead{
@@ -104,17 +105,27 @@ background-color: #f0f0f0 ;
 color: black;
 font-weight: normal;
 font-family: sans-serif;
-
+overflow-y: scroll; 
 }
 
-.table tr{
-    text-align: center;
+
+
+tbody {
+   
+    height: 200px;
+    overflow: scroll;
+    width: 100%;
     
 }
+
+
+
 
 .nav-link .down {
     color:white;
 }
+
+
 .form{
     border: 2px solid #f0f0f0;
     border-radius: 10px;

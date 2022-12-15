@@ -6,6 +6,7 @@ const GET_PROCESSBYDATE_HEURE= "http://localhost:8080/process/conditionnement/ge
 const GET_PROCESSBY_ID = "http://localhost:8080/process/conditionnement/getProcessByEtapes_idGnerate/"
 const GET_PROCESSBY_CATEGORIE ="http://localhost:8080/process/conditionnement/getProcessByEtapes_categorie/"
 const GET_PROCESSBY_PRODUIT ="http://localhost:8080/process/conditionnement/getProcessByEtapes_produit/"
+const GET_PROCESS_ACTUAL = "http://localhost:8080/process/conditionnement/getActuelle"
 
 class ConditService {
 
@@ -37,6 +38,9 @@ class ConditService {
         return axios.get(GET_PROCESSBY_PRODUIT+nom_produit)
     }
 
+    getActualProcess() {
+        return axios.get(GET_PROCESS_ACTUAL)
+    }
 }
 
 export default new ConditService()

@@ -1,6 +1,7 @@
 const pool =require ("../db")
 const queries= require("../queries/queries.sortie")
 const q= require("../queries/queries")
+const ActualProcess = require ("../queries/querie.actualProcess")
 
 const dateNow = () => {
     var today = new Date 
@@ -149,6 +150,14 @@ getProcessByEtapes_idGnerate = (req, res) => {
     )
 }
 
+getProduitEnAttente = (req, res) => {
+    pool.query (ActualProcess.ActualProcess, ['conditionnement' , 'sortie'],
+            (error, result) => {
+                res.status(200).json(result.rows)  
+        }
+    )
+}
+
 module.exports = {
     ajouterProcessSortie,
     modifierProcessSortie,
@@ -156,7 +165,8 @@ module.exports = {
     getProcessByDateHeure,
     getProcessByEtapes_categorie,
     getProcessByEtapes_produit,
-    getProcessByEtapes_idGnerate
+    getProcessByEtapes_idGnerate,
+    getProduitEnAttente
     
 
 }

@@ -6,6 +6,7 @@ const GET_NETTOYAGEBYDATE_HEURE= "http://localhost:8080/process/nettoyage/getPro
 const GET_PROCESSBY_ID = "http://localhost:8080/process/nettoyage/getProcessByEtapes_idGnerate/"
 const GET_PROCESSBY_CATEGORIE ="http://localhost:8080/process/nettoyage/getProcessByEtapes_categorie/"
 const GET_PROCESSBY_PRODUIT ="http://localhost:8080/process/nettoyage/getProcessByEtapes_produit/"
+const GET_PROCESS_ACTUAL = "http://localhost:8080/process/nettoyage/getActuelle"
 
 class NettoyageService {
 
@@ -35,6 +36,9 @@ class NettoyageService {
         return axios.get(GET_PROCESSBY_PRODUIT+nom_produit)
     }
 
+    getActualProcess() {
+        return axios.get(GET_PROCESS_ACTUAL)
+    }
 
 }
 

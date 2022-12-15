@@ -6,6 +6,7 @@ const GET_PROCESSBYDATE_HEURE= "http://localhost:8080/process/sortie/getProcessB
 const GET_PROCESSBY_ID = "http://localhost:8080/process/sortie/getProcessByEtapes_idGnerate/"
 const GET_PROCESSBY_CATEGORIE ="http://localhost:8080/process/sortie/getProcessByEtapes_categorie/"
 const GET_PROCESSBY_PRODUIT ="http://localhost:8080/process/sortie/getProcessByEtapes_produit/"
+const GET_PROCESS_ACTUAL = "http://localhost:8080/process/sortie/getActuelle"
 
 class SortieService {
 
@@ -35,6 +36,9 @@ class SortieService {
         return axios.get(GET_PROCESSBY_PRODUIT+nom_produit)
     }
 
+    getActualProcess() {
+        return axios.get(GET_PROCESS_ACTUAL)
+    }
 
 }
 

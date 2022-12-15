@@ -10,5 +10,6 @@ router.get ("/getProcessByDateHeure", sortie.getProcessByDateHeure)
 router.get( "/getProcessByEtapes_categorie/:categorie", sortie.getProcessByEtapes_categorie)
 router.get( "/getProcessByEtapes_produit/:nom_produit", sortie.getProcessByEtapes_produit)
 router.get( "/getProcessByEtapes_idGnerate/:id_gnerate", sortie.getProcessByEtapes_idGnerate)
+router.get( "/getActuelle" , sortie.getProduitEnAttente)
 
 module.exports = router

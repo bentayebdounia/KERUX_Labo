@@ -7,6 +7,7 @@ import './fournisseur.css'
 
 const Reception = (props) => {
 
+    //modal de confirmation
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
@@ -24,10 +25,12 @@ const Reception = (props) => {
     const toggleRecomendationFalse = () => setToggleRecomendation(false)
 
     const [id_bon, setId_bon] = useState()
+    const [achetLivreur, setAchetlivreur] = useState()
  
     const [nom_fournisseur, setNomFournisseur] = useState('')
     const [fk_fournisseur, setFk_fournisseur] = useState('')
     const [acheteur, setAcheteur] = useState('')
+    const [livreur, setLivreur] = useState('')
     const [type_bon, setTypebon] = useState('')
     const [recepteur, setRecepteur] = useState('')
     const [bonScanner, setBonScanner] = useState('')
@@ -53,7 +56,7 @@ const Reception = (props) => {
         if (toggleConfirme){
             //ajouter un bon au bdd
             
-            ProcessService.ajouterBon(fk_fournisseur, acheteur, type_bon, recepteur).then( (res)=> {
+            ProcessService.ajouterBon(fk_fournisseur, acheteur, type_bon, recepteur , livreur).then( (res)=> {
             
             setId_bon(res.data[0].id_bon)
                 toggleshow() //afficher le component de ajouter un produit fourni
@@ -64,7 +67,7 @@ const Reception = (props) => {
 
     const confirmer = (e) => {
         e.preventDefault()
-        handleShow()  
+        handleShow()  //modal de confirmation
 
     }
 
@@ -108,7 +111,9 @@ const Reception = (props) => {
     let Fournisseur
 
     
-    
+    console.log(achetLivreur);
+    console.log('livreur '+livreur);
+    console.log('acheteur ' +acheteur);
    
         Fournisseur=(
                         <>
@@ -164,20 +169,21 @@ const Reception = (props) => {
 
                 <div className="mb-3 row">
                     <div class="col-sm-1 form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  onChange={(e)=> {setAchetlivreur(false) ; setLivreur('')}} />
                         <label class="form-check-label" forHtml="flexRadioDefault1">
                            Acheteur   
                         </label>
                     </div>
+
                     <div class="col-sm-1 form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"  onChange={(e)=> {setAchetlivreur(true) ; setAcheteur('')}} />
                         <label class="form-check-label" forHtml="flexRadioDefault2">
                             Livreur
                         </label>
                     </div>
 
                     <div className="col-sm-10">
-                      <input type="text"  className="form-control" id="acheteur" value={acheteur} onChange={(e)=> setAcheteur(e.target.value)} required/>
+                      <input type="text"  className="form-control" id="acheteur" value={achetLivreur ? livreur : acheteur} onChange={(e)=>{ achetLivreur  ? (setLivreur(e.target.value) ) : (setAcheteur(e.target.value) )}} required/>
                     </div>
 
                 </div>

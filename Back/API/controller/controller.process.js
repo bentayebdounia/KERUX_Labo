@@ -22,8 +22,8 @@ ajouterBon = (req, res) => {
     var datee = dateNow()
     var heure = HeureNow()
     
-    const { fk_fournisseur, acheteur, type_bon, recepteur } = req.body
-    pool.query(queries.ajouterReception, [fk_fournisseur ,acheteur ,type_bon  ,datee , heure, recepteur] ,
+    const { fk_fournisseur, acheteur, type_bon, recepteur, livreur } = req.body
+    pool.query(queries.ajouterReception, [fk_fournisseur ,acheteur ,type_bon  ,datee , heure, recepteur, livreur] ,
          (error, result) =>{
             if (error) throw error
             res.status(200).json(result.rows)

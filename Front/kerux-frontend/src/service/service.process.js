@@ -9,9 +9,9 @@ const GET_PRODUIT_BY_NOM_FOURNISSEUR = "http://localhost:8080/process/getProdByN
 const GET_PRODUIT_FOURNI = "http://localhost:8080/process/p/get_ProdFourni"
 
 class ProcessService {
-    ajouterBon(fk_fournisseur, acheteur, type_bon, recepteur){
+    ajouterBon(fk_fournisseur, acheteur, type_bon, recepteur, livreur){
 
-        const bon = { fk_fournisseur, acheteur, type_bon, recepteur }
+        const bon = { fk_fournisseur, acheteur, type_bon, recepteur, livreur }
         
         return axios.post(PRODUIT_API_BON, bon)
     }

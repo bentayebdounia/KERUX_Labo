@@ -41,7 +41,9 @@ CREATE TABLE fournisseur (
     activite VARCHAR(100),
     modalite_paiement VARCHAR (100),
     type_paiement VARCHAR (100),
-    nature_livraison VARCHAR (100) 
+    nature_livraison VARCHAR (100) ,
+    categorie VARCHAR (100),
+    date_enregistement DATE
 
 );
 
@@ -61,7 +63,8 @@ CREATE TABLE bon (
     type_bon VARCHAR(100),
     datee DATE ,
     heure TIME,
-    recepteur VARCHAR (200)
+    recepteur VARCHAR (200),
+    livreur VARCHAR (200)
 );
 
 CREATE TABLE produit_fourni(
@@ -82,7 +85,8 @@ CREATE TABLE entrepot (
     air_stockage VARCHAR(200),
     capacite VARCHAR (200),
     adresse VARCHAR(200),
-    id_personne INT
+    id_personne INT;
+    date_enregistement_entrepot DATE
 );
 
 CREATE TABLE stock (
@@ -113,7 +117,8 @@ CREATE TABLE process_historique(
     id_personne INT ,
     fk_proditFourni INT REFERENCES produit_fourni(id_produit),
     fk_stock INT REFERENCES stock (id_stock),
-    note VARCHAR(500)
+    note VARCHAR(500),
+    id_gnerate VARCHAR (500)
 );
 
 CREATE TABLE process(
@@ -136,12 +141,12 @@ CREATE TABLE process(
     id_personne INT ,
     fk_proditFourni INT REFERENCES produit_fourni(id_produit),
     fk_stock INT REFERENCES stock (id_stock),
-    note VARCHAR(500)
+    note VARCHAR(500),
+    id_gnerate VARCHAR (500)
 );
-CREATE TABLE agentProcess (
+CREATE TABLE agentprocess (
     id_agent SERIAL PRIMARY KEY,
-    id_processHistorique INT,
-    id_process INT,
+    id_gnerateprocess VARCHAR (200),
     id_personne INT
 );
 
@@ -149,7 +154,11 @@ CREATE TABLE box_couper (
     id SERIAL PRIMARY KEY ,
     id_produit VARCHAR (200),
     id_enregistrement VARCHAR (200),
-    id_nettoyage VARCHAR (200)
+    id_nettoyage VARCHAR (200),
+    id_generate VARCHAR (200),
+    datee DATE,
+    heure DATE
+
 
 ) 
 

@@ -285,12 +285,34 @@ const Acueil = (props) => {
                                 <input type="password" className="form-control" id="password" value={mot_passe} onChange={(e)=> setPassword(e.target.value)} required/>
                                 </div>
                             </div>
-                        
+                            <div className="d-grid gap-2 my-4">
+                        <button className="btn1" type="submit" id="ajouterbtn" >AJOUTER</button>
+                    </div>
 
                     </form>
-                    <div className="d-grid gap-2 my-4">
-                        <button className="btn1" type="submit" id="ajouterbtn" onClick={(e)=> saveAgent(e)}>AJOUTER</button>
-                    </div>
+                    {
+                        (function () {
+                            'use strict'
+                          
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+                          
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                              .forEach(function (form) {
+                                form.addEventListener('submit', function (event) {
+                                  if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                  }
+                                  if (form.checkValidity()) saveAgent(event)
+                          
+                                  form.classList.add('was-validated')
+                                }, false)
+                              })
+                          })()
+                    }
+
                 </section>
     
             </div>

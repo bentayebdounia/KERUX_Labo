@@ -202,9 +202,9 @@ const TestCoupage = () => {
 
 
     var coupage , testNet
-    console.log(process)
-    console.log(id_generate);
-    console.log(boxes);
+    //console.log(process)
+    //console.log(id_generate);
+    //console.log(boxes);
 
 
 
@@ -259,21 +259,29 @@ const TestCoupage = () => {
        const chargerDataEnStock = () => {
         toggleshow2()
         toggleDisplay1()
-
+        console.log(tableDonneesStocker);
         setButtoncolor(false)
         setButtoncolor2(!buttonColor2)
         EnAttente.splice("") 
         enStock.splice("") 
-        for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
+        
+       /* for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
             if(tableDonneesStocker[i].id_coupage === null  ) { 
                  if(tableDonneesStocker[i].fk_stock !== null)
                  if(tableDonneesStocker[i].date_sortie === null)
                      enStock.push(tableDonneesStocker[i]) 
-              }
+              }*/
               
-              
+        
+              for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
+                console.log('i= '+i);
+                if(tableDonneesStocker[i].id_coupage === null   && tableDonneesStocker[i].fk_stock !== null && tableDonneesStocker[i].date_sortie === null) { 
+                     console.log('i= '+i);
+                      
+                         enStock.push(tableDonneesStocker[i]) 
+                  }
    
-      
+      console.log('hello'+enStock);
 }
 setEnstock(
     enStock.map(p => {
@@ -330,7 +338,7 @@ setEnstock(
                                                 EnAttente.map(data => {
                                                     if (p.id_gnerate === data.id_gnerate) {
                                                         data.select = checked;
-                                                         
+                                                        boxes[0].id_box=p.id_gnerate
                                                     }
                                                     else 
                                                         data.select=""
@@ -349,7 +357,7 @@ setEnstock(
                                         <td>{p.nom_produit}</td> 
                                         <td>{p.poids}</td> 
                                         <td>{p.nombre}</td> 
-                                        <td>{moment.utc(p.datee).format('DD/MM/YYYY')}</td> 
+                                        <td>{p.datee}</td> 
                                         <td>{p.heure}</td> 
                                         
                                         
@@ -416,7 +424,7 @@ if(buttonColor2)
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{moment.utc(p.datee).format('DD/MM/YYYY')}</td> 
+                                    <td>{p.datee}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 

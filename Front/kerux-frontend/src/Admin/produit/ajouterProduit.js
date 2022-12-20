@@ -68,10 +68,33 @@ const AjouterProduit = (props) => {
                         </div>
  
 
-                    </form>
+                    
                     <div className="d-grid gap-2 my-4">
-                        <button className="btn1" type="submit" id="ajouterbtn" onClick={fonctionAjouter} >AJOUTER</button>
+                        <button className="btn1" type="submit" id="ajouterbtn" >AJOUTER</button>
                     </div>
+                    </form>
+                    {
+                        (function () {
+                            'use strict'
+                          
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+                          
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                              .forEach(function (form) {
+                                form.addEventListener('submit', function (event) {
+                                  if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                  }
+                                  if (form.checkValidity()) fonctionAjouter(event)
+                          
+                                  form.classList.add('was-validated')
+                                }, false)
+                              })
+                          })()
+                    }
                 </section>
     
             </div>
